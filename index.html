@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta charset="UTF-8">
+		<title>MVC App</title>
+		<script id="sap-ui-bootstrap"
+			src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js"
+			data-sap-ui-libs="sap.m"
+			data-sap-ui-theme="sap_belize"
+			data-sap-ui-compatVersion="edge">
+		</script>
+		<script>
+			//Application Data
+			var oData = {
+				"CountSuppliers" : "2",
+				"Suppliers": [
+					{
+						"ID":0,
+						"Name":"Exotic Liquids",
+						"Address":{
+							"Street":"NE 228th",
+							"City":"Sammamish",
+							"State":"WA",
+							"ZipCode":"98074",
+							"Country":"USA"
+						}
+					},
+					{
+						"ID":1,
+						"Name":"Tokyo Traders",
+						"Address":{
+							"Street":"NE 40th",
+							"City":"Redmond",
+							"State":"WA",
+							"ZipCode":"98052",
+							"Country":"USA"
+						}
+					}
+				]
+			};
+			
+			
+			//Create the JSON model object, and set the data in there.
+			var oModel = new sap.ui.model.json.JSONModel();
+			oModel.setData(oData);
+			
+			//Set model to core, so that the model is available to entire app
+			sap.ui.getCore().setModel(oModel);
+			
+			//Create columns for the table.
+			var aColumns = [
+					new sap.m.Column({
+						header: new sap.m.Text ({
+							text: "ID"
+						})	
+					}),
+					new sap.m.Column({
+						header: new sap.m.Text ({
+							text: "Name"
+						})	
+					})
+				];
+				
+			//Create the teamplate to use for repeated data
+			var oTemplate = new sap.m.ColumnListItem({
+				type:"Navigation",
+				cells:[
+						new sap.m.ObjectIdentifier({
+							text: "{ID}"
+						}),
+						new sap.m.ObjectIdentifier({
+							text: "{Name}"
+						})
+					]
+			});
+			
+			//Display number of suppliers in toolbar
+			var oTableHeader = new sap.m.Toolbar({
+				content:[
+					sap.m.Title({
+						text: "Number Of Suppliers : {/CountSuppliers}"
+					})
+					]
+			});
+			
+			
+			//With all components of table created already, proceed to create the table control itself.
+			var oTable = new sap.m.Table({
+				columns: aColumns,
+				headerToolbar: oTableHeader
+			});
+			
+			//Finally bind the table items to supplier entries.
+			oTable.bindItems("/Suppliers", oTemplate);
+			
+			var oPageMaster = new sap.m.Page("masterPage", {
+				title:"Supplier Overview",
+				content: [oTable]
+			});
+			
+			var oApp = new sap.m.App("myApp");
+			oApp.addPage(oPageMaster);
+			oApp.placeAt("content");
+			
+		
+		</script>
+	</head>
+
+	<body class="sapUiBody" role="application">
+		<div id="content"></div>
+	</body>
+
+</html>
