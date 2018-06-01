@@ -50,22 +50,14 @@
 			//Set model to core, so that the model is available to entire app
 			sap.ui.getCore().setModel(oModel);
 			
-			//Instantiate Master page
-			var oPageMasterView = sap.ui.view("masterPage", {
-				type: sap.ui.core.mvc.ViewType.JS,
-				viewName: "sapui5.demo.mvcapp.view.Master"
+			var oAppView = sap.ui.view("appview", {
+				type:sap.ui.core.mvc.ViewType.XML,
+				viewName:"sapui5.demo.mvcapp.view.App"
 			});
 			
-			//Instantiate Detail View.
-			var oPageDetail = sap.ui.view("detailPage", {
-				type: sap.ui.core.mvc.ViewType.JS,
-				viewName: "sapui5.demo.mvcapp.view.Detail",
-			});
+			var oApp = oAppView.byId("app");
 			
-			var oApp = new sap.m.App({
-				initialPage: "masterPage"
-			});
-			oApp.addPage(oPageMasterView).addPage(oPageDetail);
+			//oApp.addPage(oPageMasterView).addPage(oPageDetail);
 			oApp.placeAt("content");
 			
 		
