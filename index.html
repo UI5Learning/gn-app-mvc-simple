@@ -13,49 +13,9 @@
 			data-sap-ui-resourceroots='{"sapui5.demo.mvcapp":"./webapp/"}'>
 		</script>
 		<script>
-			//Application Data
-			var oData = {
-				"CountSuppliers" : "2",
-				"Suppliers": [
-					{
-						"ID":0,
-						"Name":"Exotic Liquids",
-						"Address":{
-							"Street":"NE 228th",
-							"City":"Sammamish",
-							"State":"WA",
-							"ZipCode":"98074",
-							"Country":"USA"
-						}
-					},
-					{
-						"ID":1,
-						"Name":"Tokyo Traders",
-						"Address":{
-							"Street":"NE 40th",
-							"City":"Redmond",
-							"State":"WA",
-							"ZipCode":"98052",
-							"Country":"USA"
-						}
-					}
-				]
-			};
 			
 			
-			//Create the JSON model object, and set the data in there.
-			var oModel = new sap.ui.model.json.JSONModel();
-			oModel.setData(oData);
 			
-			//Set model to core, so that the model is available to entire app
-			sap.ui.getCore().setModel(oModel);
-			
-			var oAppView = sap.ui.view("appview", {
-				type:sap.ui.core.mvc.ViewType.XML,
-				viewName:"sapui5.demo.mvcapp.view.App"
-			});
-			
-			var oApp = oAppView.byId("app");
 			
 			//oApp.addPage(oPageMasterView).addPage(oPageDetail);
 			oApp.placeAt("content");
